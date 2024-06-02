@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-type EerrorResponse struct {
+type ErrorResponse struct {
 	Error string `json:"Error"`
 }
 
