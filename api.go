@@ -21,6 +21,8 @@ func (s *APIServer) Serve() {
 	subrouter := router.PathPrefix("/api/v1").Subrouter()
 
 	// registering our servicer
+	tasksService := NewTasksService(s.store)
+	tasksService.RegisterRoutes(router)
 
 	log.Println("Strarting the API server at", s.addr)
 

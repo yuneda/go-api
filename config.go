@@ -1,20 +1,29 @@
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 type Config struct {
 	Port       string
 	DBUser     string
 	DBPassword string
 	DBAddress  string
-	DBname     string
+	DBName     string
 	JWTSecret  string
 }
 
 var ENVS = initConfig()
 
-func initConfig() Confg {
+func initConfig() Config {
 	return Config{
-		Port: getEnv("PORT", "8080"),
-		DBUser: getEnv("DB_USER", "root"),,
+		Port:       getEnv("PORT", "8080"),
+		DBUser:     getEnv("DB_USER", "root"),
+		DBPassword: getEnv("DB_PASSWORD", "password"),
+		DBAddress:  fmt.Sprintf("%s:%s", getEnv("DB_HOST", "127.0.0.1"), getEnv("DB_PORT", "3306")),
+		DBName:     getEnv("DB_Name", "projectmanager"),
+		JWTSecret:  getEnv("JWT_Secret", "randomjwtsecret"),
 	}
 }
 

@@ -8,10 +8,10 @@ import (
 
 func main() {
 	cfg := mysql.Config{
-		User:                 "root",
-		Passwd:               "mypassword",
-		Addr:                 "",
-		DBName:               "projectmanager",
+		User:                 ENVS.DBUser,
+		Passwd:               ENVS.DBPassword,
+		Addr:                 ENVS.DBAddress,
+		DBName:               ENVS.DBName,
 		Net:                  "tcp",
 		AllowNativePasswords: true,
 		ParseTime:            true,
