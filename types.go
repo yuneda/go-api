@@ -2,6 +2,10 @@ package main
 
 import "time"
 
+type EerrorResponse struct {
+	Error string `json:"Error"`
+}
+
 type Task struct {
 	ID           int64     `json:"id"`
 	Name         string    `json:"name"`

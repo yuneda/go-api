@@ -30,6 +30,7 @@ func (s *TasksService) handleCreateTask(w http.ResponseWriter, r *http.Request) 
 	body, err := io.ReadAll(r.Body)
 
 	if err != nil {
+		WriteJSON(w, http.StatusBadRequest, EerrorResponse{Error: "Invalid request payload"})
 		return
 	}
 
@@ -38,12 +39,23 @@ func (s *TasksService) handleCreateTask(w http.ResponseWriter, r *http.Request) 
 	var task *Task
 	err = json.Unmarshal(body, &task)
 	if err != nil {
+		WriteJSON(w, http.StatusBadRequest, EerrorResponse{Error: "Invalid request payload"})
 		return
 	}
 
 	if err := validateTaskPayload(task); err != nil {
+		WriteJSON(w, http.StatusBadRequest, EerrorResponse{Error: err.Error()})
 		return
 	}
+
+	t, err := s.store.CreateTask(task)
+
+	if err != nil {
+		WriteJSON(w, http.StatusInternalServerError, EerrorResponse{Error: "Error creating task"})
+		return
+	}
+
+	WriteJSON(w, http.StatusCreated, t)
 }
 
 func (s *TasksService) handleGetTask(w http.ResponseWriter, r *http.Request) {
