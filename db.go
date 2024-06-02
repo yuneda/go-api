@@ -57,7 +57,7 @@ func (s *MySQLStorage) createProjectsTable() error {
 
 func (s *MySQLStorage) createTasksTable() error {
 	_, err := s.db.Exec(`
-	CREATE TABLE IF NOT EXISTS projects (
+	CREATE TABLE IF NOT EXISTS tasks (
 		id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 		name VARCHAR(255) NOT NULL,
 		status ENUM('TODO', 'IN_PROGRESS', 'IN_TESTING', 'DONE') NOT NULL DEFAULT 'TODO',
@@ -76,7 +76,7 @@ func (s *MySQLStorage) createTasksTable() error {
 
 func (s *MySQLStorage) createUsersTable() error {
 	_, err := s.db.Exec(`
-	CREATE TABLE IF NOT EXISTS projects (
+	CREATE TABLE IF NOT EXISTS users (
 		id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 		email VARCHAR(255) NOT NULL,
 		firstName VARCHAR(255) NOT NULL,
